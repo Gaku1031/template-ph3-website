@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // モデルから必要なデータを取得するメソッド
+    public static function getUsers()
+    {
+        // 全てのユーザデータを取得し返す
+        return self::all();
+    }
 }
