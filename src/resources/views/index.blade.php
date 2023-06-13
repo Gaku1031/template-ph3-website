@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  @include('parts.header')
+  @include('parts.footer')
   
 </body>
 

@@ -16,12 +16,15 @@ class QuizController extends Controller
 
     public function show($id)
     {
-        $quiz = Quiz::findOrFail($id);
-        $questions = Question::with('choices')->where('quiz_id', $id)->get();
+        // eagerロード(withメソッドで実装可能)
+        // 指定されたidのクイズを取得し、そのクイズに紐づく設問と選択肢を取得する
+        // $quizをviewに渡す
+        $quiz = Quiz::with('questions.choices')->find($id);
 
-        return view('quiz.show', [
-            'quiz' => $quiz,
-            'questions' => $questions,
-        ]);
+        if ($quiz === null) {
+            abort(404);
+        }
+
+        return view('quiz.show', ['quiz' => $quiz]);
     }
 }
