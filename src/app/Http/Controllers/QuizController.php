@@ -27,4 +27,18 @@ class QuizController extends Controller
 
         return view('quiz.show', ['quiz' => $quiz]);
     }
+
+    public function edit($id)
+    {
+        $quiz = Quiz::findOrFail($id);
+        return view('quiz.edit', compact('quiz'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $quiz = Quiz::findOrFail($id);
+        $quiz->update($request->all());
+        return redirect()->route('quizzes.index')->with('message', 'クイズを更新しました。');
+    }
+
 }

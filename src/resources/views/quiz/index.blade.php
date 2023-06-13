@@ -38,9 +38,9 @@
                             @foreach($quizzes as $quiz)
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quiz.show', $quiz->id) }}" class="text-2xl font-bold">{{ $quiz->name }}</a></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center"><button class="px-2 py-1 text-green-500 border border-green-500 font-semibold rounded hover:bg-green-100">編集</button></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quiz.show', $quiz->id) }}"><button class="px-2 py-1 text-blue-500 border border-blue-500 font-semibold rounded hover:bg-blue-100">詳細</button></a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.show', $quiz->id) }}" class="text-2xl font-bold">{{ $quiz->name }}</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.edit', $quiz->id) }}"><button class="px-2 py-1 text-green-500 border border-green-500 font-semibold rounded hover:bg-green-100">編集</button></a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.show', $quiz->id) }}"><button class="px-2 py-1 text-blue-500 border border-blue-500 font-semibold rounded hover:bg-blue-100">詳細</button></a></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center"><button class="px-2 py-1 text-red-500 border border-red-500 font-semibold rounded hover:bg-red-100">削除</button></td>
                                 </tr>
                             </tbody>

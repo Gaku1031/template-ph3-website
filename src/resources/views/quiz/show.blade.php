@@ -90,3 +90,4 @@
   </div>
   @include('parts.footer')
 </body>
+</html>

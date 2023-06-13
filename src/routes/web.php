@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
-Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quiz.show');
+Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quizzes.show');
+Route::get('quiz/{id}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
+Route::put('/quizzes/{id}', [QuizController::class, 'update'])->name('quizzes.update');
 
 require __DIR__.'/auth.php';
