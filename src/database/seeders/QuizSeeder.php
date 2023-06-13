@@ -14,8 +14,18 @@ class QuizSeeder extends Seeder
     public function run(): void
     {
         DB::table('quizzes')->insert([
-            'id' => 1,
-            'name' => '東京の難読地名クイズ問題',
+            [
+                'id' => 1,
+                'name' => '東京の難読地名クイズ問題',
+            ],
+            [
+                'id' => 2,
+                'name' => '他己紹介クイズ',
+            ],
+            [
+                'id' => 3,
+                'name' => 'ITクイズ',
+            ],
         ]);
     }
 }

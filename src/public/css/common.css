@@ -820,6 +820,7 @@ body {
 }
 .u-icon__twitter:before {
   content: "\ea96";
+  font-family: "Font Awesome 5 Brands";
 }
 @media not all and (min-width: 768px) {
   .p-header__inner {

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('カテゴライズしたクイズ名 ex.) 東京の難読地名クイズ問題');
+            $table->string('name')->comment('カテゴライズしたクイズ名 ex.) ITクイズ');
             $table->timestamps();
         });
     }
