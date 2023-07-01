@@ -6,20 +6,15 @@
     <title>クイズ一覧</title>
     @vite('resources/css/app.css')
 </head>
-{{-- <body class="bg-gray-200">
-<div class="container mx-auto px-4">
-    <h1 class="text-3xl mt-10 text-center">クイズ一覧</h1>
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
-        @foreach($quizzes as $quiz)
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <a href="{{ route('quiz.show', $quiz->id) }}" class="text-2xl font-bold">{{ $quiz->name }}</a>
-            </div>
-        @endforeach
-    </div>
-</div>
-</body> --}}
 
 <body class="bg-gray-100">
+    <!-- フラッシュメッセージがある場合に表示 -->
+    @if (session('message'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ session('message') }}</span>
+        </div>
+    @endif
+
     <h1 class="font-bold text-3xl text-center mt-5">クイズ一覧</h1>
     <div class="container mx-auto py-10">
         <div class="flex flex-col">

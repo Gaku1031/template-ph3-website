@@ -25,7 +25,7 @@
             <div class="l-container">
             <h1 class="p-hero__title">
                 <span class="p-hero__title__label">POSSE課題</span>
-                <span class="p-hero__title__inline">ITクイズ</span>
+                <span class="p-hero__title__inline">{{ $quiz->name }}</span>
             </h1>
             </div>
         </section>

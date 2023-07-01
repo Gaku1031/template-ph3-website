@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\Choice;
 
 class QuizController extends Controller
 {
@@ -30,15 +31,33 @@ class QuizController extends Controller
 
     public function edit($id)
     {
-        $quiz = Quiz::findOrFail($id);
+        $quiz = Quiz::with(['questions.choices'])->findOrFail($id);
+        // dd($quiz);
         return view('quiz.edit', compact('quiz'));
     }
 
     public function update(Request $request, $id)
     {
         $quiz = Quiz::findOrFail($id);
-        $quiz->update($request->all());
-        return redirect()->route('quizzes.index')->with('message', 'クイズを更新しました。');
-    }
 
+        $quiz->update([
+            'name' => $request->name,
+        ]);
+
+        foreach ($request->questions as $questionId => $questionText) {
+            $question = Question::findOrFail($questionId);
+            $question->update([
+                'text' => $questionText,
+            ]);
+        }
+
+        foreach ($request->choices as $choiceId => $choiceText) {
+            $choice = Choice::findOrFail($choiceId);
+            $choice->update([
+                'text' => $choiceText,
+            ]);
+        }
+        session()->flash('message', '更新されました！');
+        return redirect()->route('quizzes.index');
+    }
 }
