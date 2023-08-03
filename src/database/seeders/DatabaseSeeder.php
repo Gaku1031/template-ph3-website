@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Choice;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            QuizSeeder::class,
+            QuestionSeeder::class,
+            ChoiceSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        for ($i = 0; $i < 100; $i++) {
+            $quiz = Quiz::factory()->create();
+
+            // 各クイズに対して、質問を6つ作成
+            for ($j = 0; $j < 6; $j++) {
+                $question = Question::factory()->create(['quiz_id' => $quiz->id]);
+
+                // 各質問に対して、選択肢を3つ作成
+                Choice::factory(3)->create(['question_id' => $question->id]);
+            }
+        }
     }
 }
