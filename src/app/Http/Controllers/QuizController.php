@@ -60,4 +60,11 @@ class QuizController extends Controller
         session()->flash('message', '更新されました！');
         return redirect()->route('quizzes.index');
     }
+
+    public function delete($id)
+    {
+        Quiz::find($id)->delete();
+
+        return redirect()->route('quizzes.index')->with('message', 'クイズが削除されました。');
+    }
 }

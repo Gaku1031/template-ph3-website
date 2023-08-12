@@ -39,5 +39,6 @@ Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quizzes.show');
 Route::get('quiz/{id}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
 Route::put('/quizzes/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+Route::delete('/quizzes/{id}', [QuizController::class, 'delete'])->name('quizzes.delete');
 
 require __DIR__.'/auth.php';
