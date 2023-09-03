@@ -48,14 +48,14 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.show', $quiz->id) }}" class="text-2xl font-bold">{{ $quiz->name }}</a></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.edit', $quiz->id) }}"><button class="px-2 py-1 text-green-500 border border-green-500 font-semibold rounded hover:bg-green-100">編集</button></a></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center"><a href="{{ route('quizzes.show', $quiz->id) }}"><button class="px-2 py-1 text-blue-500 border border-blue-500 font-semibold rounded hover:bg-blue-100">詳細</button></a></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center"><button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="px-2 py-1 text-red-500 border border-red-500 font-semibold rounded hover:bg-red-100" type="button">削除</button></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center"><button data-modal-target="popup-modal-{{ $quiz->id }}" data-modal-toggle="popup-modal-{{ $quiz->id }}" class="px-2 py-1 text-red-500 border border-red-500 font-semibold rounded hover:bg-red-100" type="button">削除</button></td>
                                 </tr>
                             </tbody>
                             {{-- modal --}}
-                            <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 bottom-0 z-50 hidden flex items-center justify-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 max-h-full bg-black bg-opacity-50">
+                            <div id="popup-modal-{{ $quiz->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 bottom-0 z-50 hidden flex items-center justify-center p-4 overflow-x-hidden overflow-y-auto md:inset-0 max-h-full bg-black bg-opacity-50">
                                 <div class="relative w-full max-w-md max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-{{ $quiz->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                             </svg>
@@ -70,7 +70,7 @@
                                                 削除
                                             </button> --}}
                                             <div class="flex justify-center">
-                                                <form action="{{ route('quizzes.delete', $quiz->id) }}" method="POST" id="delete-form">
+                                                <form action="{{ route('quizzes.delete', $quiz->id) }}" method="POST" id="delete-form-{{ $quiz->id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">

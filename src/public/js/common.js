@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   modalToggleButtons.forEach(button => {
     button.addEventListener('click', (event) => {
       const targetModalId = event.currentTarget.getAttribute('data-modal-target');
-      const targetModal = document.getElementById(targetModalId);
+      const targetModal = document.getElementById(`popup-modal-${targetModalId}`);
 
       if (targetModal) {
         targetModal.classList.toggle('hidden');
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   modalHideButtons.forEach(button => {
     button.addEventListener('click', (event) => {
       const targetModalId = event.currentTarget.closest('.fixed').id;
-      const targetModal = document.getElementById(targetModalId);
-
+      const targetModal = document.getElementById(`popup-modal-${targetModalId}`);
       if (targetModal) {
         targetModal.classList.add('hidden');
       }
