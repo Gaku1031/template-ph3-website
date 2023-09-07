@@ -11,8 +11,16 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $quizzes = Quiz::all();
+        $quizzes = Quiz::withTrashed()->paginate(20);
         return view('quiz.index', ['quizzes' => $quizzes]);
+    }
+
+    public function restore($id)
+    {
+        $quiz = Quiz::withTrashed()->find($id);
+        $quiz->restore();
+
+        return redirect()->route('quizzes.index')->with('message', 'クイズが復元されました。');
     }
 
     public function show($id)
@@ -66,5 +74,49 @@ class QuizController extends Controller
         Quiz::find($id)->delete();
 
         return redirect()->route('quizzes.index')->with('message', 'クイズが削除されました。');
+    }
+
+    public function createForm()
+    {
+        return view('quiz.form');
+    }
+
+    public function store(Request $request)
+    {
+        // リクエストのバリデーション
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'question' => 'required|string',
+            'choices.*' => 'required|string|max:250',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Quizテーブルへの挿入
+        $quiz = Quiz::create(['name' => $request->name]);
+
+        // 画像のアップロード処理
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $imagePath = $request->image->storeAs('images', $imageName, 'public');
+        }
+
+        // Questionテーブルへの挿入
+        $question = Question::create([
+            'quiz_id' => $quiz->id,
+            'question' => $request->question,
+            'image' => $imagePath
+        ]);
+
+        // Choicesテーブルへの挿入
+        foreach ($request->choices as $choice) {
+            Choice::create([
+                'question_id' => $question->id,
+                'choice' => $choice
+            ]);
+        }
+
+        // quiz/index.blade.phpへのリダイレクト
+        return redirect()->route('quizzes.index');
     }
 }

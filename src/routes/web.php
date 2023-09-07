@@ -40,5 +40,16 @@ Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quizzes.show
 Route::get('quiz/{id}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
 Route::put('/quizzes/{id}', [QuizController::class, 'update'])->name('quizzes.update');
 Route::delete('/quizzes/{id}', [QuizController::class, 'delete'])->name('quizzes.delete');
+Route::get('/quiz/create', [QuizController::class, 'createForm'])->name('quiz.create.form');
+Route::post('/quizzes/create', [QuizController::class, 'store'])->name('quizzes.store');
+Route::get('/quizzes/{quiz}/restore', [QuizController::class, 'restore'])->name('quizzes.restore');
 
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+    Route::get('/quizzes/{id}', [QuizController::class, 'show'])->name('quizzes.show');
+    Route::get('quiz/{id}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
+    Route::get('/quiz/create', [QuizController::class, 'createForm'])->name('quiz.create.form');
+    Route::post('/quizzes/store', [QuizController::class, 'store'])->name('quizzes.store');
+    Route::get('/quizzes/{quiz}/restore', [QuizController::class, 'restore'])->name('quizzes.restore');
+});
 require __DIR__.'/auth.php';
